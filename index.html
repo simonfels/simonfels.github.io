@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Violas Adventure</title>
+    <title>Unity WebGL Player | BeanJam22</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
@@ -20,7 +20,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Violas Adventure</div>
+        <div id="unity-build-title">BeanJam22</div>
       </div>
     </div>
     <script>
@@ -56,15 +56,15 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/test.loader.js";
+      var loaderUrl = buildUrl + "/BEANS.loader.js";
       var config = {
-        dataUrl: buildUrl + "/test.data.unityweb",
-        frameworkUrl: buildUrl + "/test.framework.js.unityweb",
-        codeUrl: buildUrl + "/test.wasm.unityweb",
+        dataUrl: buildUrl + "/BEANS.data.br",
+        frameworkUrl: buildUrl + "/BEANS.framework.js.br",
+        codeUrl: buildUrl + "/BEANS.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "Tiny Moon",
-        productName: "Violas Adventure",
-        productVersion: "1.1",
+        companyName: "DefaultCompany",
+        productName: "BeanJam22",
+        productVersion: "1.0",
         showBanner: unityShowBanner,
       };
 
@@ -97,7 +97,6 @@
         canvas.style.height = "600px";
       }
 
-      canvas.style.background = "url('" + buildUrl + "/test.jpg.unityweb') center / cover";
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
