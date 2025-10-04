@@ -204,7 +204,7 @@ tile_map_data = PackedByteArray("AAD6//7/AAACAAIAAAD7////AAACAAIAAAD8////AAACAAI
 tile_set = SubResource("TileSet_foyw7")
 
 [node name="Player" parent="." instance=ExtResource("2_bo08i")]
-position = Vector2(8, -104)
+position = Vector2(9, -104)
 speed = 100
 fall_acceleration = 300
 jump_height = 40
