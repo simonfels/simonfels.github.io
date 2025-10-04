@@ -21,11 +21,9 @@ func _physics_process(delta):
 	var direction = Vector2.ZERO
 	
 	if abs(transform.get_origin().x - target_location.x) < 0.5:
-		print_debug("switch")
 		switch_direction()
 	
 	direction = target_location - transform.get_origin()
-	print_debug(direction)
 
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()

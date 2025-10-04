@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="collector-ldjam58"
-run/main_scene="uid://unhcvwa31882"
+run/main_scene="uid://ufr6tam48j27"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://ufr6tam48j27"]
 
-[ext_resource type="Texture2D" uid="uid://7gk8fukkg8bl" path="res://tilemap.png" id="1_ojold"]
-[ext_resource type="PackedScene" path="res://player.tscn" id="2_bo08i"]
+[ext_resource type="Texture2D" uid="uid://7gk8fukkg8bl" path="res://Tilemaps/tilemap.png" id="1_ojold"]
+[ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="2_bo08i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo08i"]
 texture = ExtResource("1_ojold")
@@ -205,10 +205,10 @@ tile_set = SubResource("TileSet_foyw7")
 
 [node name="Player" parent="." instance=ExtResource("2_bo08i")]
 position = Vector2(8, -104)
-scale = Vector2(0.25, 0.25)
 speed = 100
 fall_acceleration = 300
 jump_height = 40
+acceleration = 15.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)

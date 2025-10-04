@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://unhcvwa31882"]
+
+[ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b4fbg4whx2wii" path="res://Scenes/enemy.tscn" id="2_0xm2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(800, 20)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(50, 50)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
+
+[node name="Main Scene" type="Node2D"]
+
+[node name="Boden2" type="StaticBody2D" parent="."]
+position = Vector2(804, -82)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boden2"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Boden2"]
+scale = Vector2(800, 20)
+texture = SubResource("CanvasTexture_h2yge")
+
+[node name="Boden" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boden"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Boden"]
+scale = Vector2(800, 20)
+texture = SubResource("CanvasTexture_h2yge")
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(0, -49)
+fall_acceleration = 520
+
+[node name="Main Camera" type="Camera2D" parent="Player"]
+position = Vector2(-2, 47)
+zoom = Vector2(3, 3)
+limit_bottom = 400
+
+[node name="Enemy" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(-317, -46)
+
+[node name="Soul" type="Area2D" parent="."]
+position = Vector2(1063, -122)
+linear_damp = 14.994
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Soul"]
+position = Vector2(12, 5)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Sprite2D" type="Sprite2D" parent="Soul"]
+position = Vector2(11.999989, 5.000001)
+scale = Vector2(50.000023, 50)
+texture = SubResource("CanvasTexture_1bvp3")
