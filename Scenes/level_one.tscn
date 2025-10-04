@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://ufr6tam48j27"]
+[gd_scene load_steps=12 format=4 uid="uid://ufr6tam48j27"]
 
+[ext_resource type="Script" uid="uid://ks1bulgy0eq5" path="res://Scenes/level_one.gd" id="1_hi7j2"]
 [ext_resource type="Texture2D" uid="uid://7gk8fukkg8bl" path="res://Tilemaps/tilemap.png" id="1_ojold"]
 [ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="2_bo08i"]
+[ext_resource type="Texture2D" uid="uid://dqsqbthtsb15h" path="res://Sprites/seelenbecken-idle.png" id="4_ik1yt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo08i"]
 texture = ExtResource("1_ojold")
@@ -193,7 +195,45 @@ terrain_set_0/terrain_0/name = "Terrain"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_bo08i")
 
-[node name="level_one" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik1yt"]
+atlas = ExtResource("4_ik1yt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7vm3"]
+atlas = ExtResource("4_ik1yt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gni6d"]
+atlas = ExtResource("4_ik1yt")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lrk7"]
+atlas = ExtResource("4_ik1yt")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y3aq0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik1yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7vm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gni6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lrk7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="level_one" type="Node2D" node_paths=PackedStringArray("SoulSpawnpoints")]
+script = ExtResource("1_hi7j2")
+SoulSpawnpoints = [NodePath("SoulSpawnpoints/Spawnmarker1"), NodePath("SoulSpawnpoints/Spawnmarker2"), NodePath("SoulSpawnpoints/Spawnmarker3"), NodePath("SoulSpawnpoints/Spawnmarker4")]
 
 [node name="layer_holder" type="Node" parent="."]
 
@@ -212,3 +252,38 @@ acceleration = 15.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)
+
+[node name="SoulSpawnpoints" type="Node" parent="."]
+
+[node name="Spawnmarker1" type="Marker2D" parent="SoulSpawnpoints"]
+position = Vector2(-100, -73)
+
+[node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker1"]
+position = Vector2(74, -16)
+
+[node name="Spawnmarker2" type="Marker2D" parent="SoulSpawnpoints"]
+position = Vector2(168, 104)
+
+[node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker2"]
+position = Vector2(91, -35)
+
+[node name="Spawnmarker3" type="Marker2D" parent="SoulSpawnpoints"]
+position = Vector2(544, -89)
+
+[node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker3"]
+position = Vector2(-139, -3)
+
+[node name="Spawnmarker4" type="Marker2D" parent="SoulSpawnpoints"]
+position = Vector2(508, 40)
+
+[node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker4"]
+position = Vector2(-88, -1)
+
+[node name="SeelenbeckenPos" type="Node2D" parent="."]
+position = Vector2(-132, -187)
+
+[node name="Seelenbecken" type="AnimatedSprite2D" parent="SeelenbeckenPos"]
+position = Vector2(16, -16)
+sprite_frames = SubResource("SpriteFrames_y3aq0")
+autoplay = "default"
+frame_progress = 0.64361614
