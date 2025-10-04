@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://unhcvwa31882"]
+[gd_scene load_steps=6 format=3 uid="uid://unhcvwa31882"]
+
+[ext_resource type="Script" uid="uid://8cxpvndjkman" path="res://player.gd" id="1_ig7tw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(278, 20)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h2yge"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bvp3"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lquwl"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Boden" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boden"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Boden"]
+scale = Vector2(278, 20)
+texture = SubResource("CanvasTexture_h2yge")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, -49)
+script = ExtResource("1_ig7tw")
+speed = 50
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_1bvp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -4.7683716e-07)
+scale = Vector2(20, 30)
+texture = SubResource("CanvasTexture_lquwl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
