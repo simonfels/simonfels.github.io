@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4fbg4whx2wii"]
+
+[ext_resource type="Script" uid="uid://82emduyvyq34" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(20, 45)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_7k104")
+speed = 314
+fall_acceleration = 395
+jump_height = 330
+movement_range = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 45.000004)
+texture = SubResource("CanvasTexture_1bvp3")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://do1emodljcn6b"]
+
+[ext_resource type="Script" uid="uid://8cxpvndjkman" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bvp3"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4flbx"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4flbx")
+speed = 235
+fall_acceleration = 725
+jump_height = 80
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1bvp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4.7683716e-07)
+scale = Vector2(20, 30)
+texture = SubResource("CanvasTexture_4flbx")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
