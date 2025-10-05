@@ -12,19 +12,22 @@ var spawn_point = Vector2.ZERO
 var movement_area = Vector2.ZERO
 var target_location = Vector2.ZERO
 
-func _ready():
+func _ready() -> void:
 	spawn_point = transform.get_origin()
 	movement_area = Vector2(spawn_point.x + movement_range, spawn_point.y)
 	target_location = movement_area
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO
-	
+
 	if abs(transform.get_origin().x - target_location.x) < 0.5:
 		switch_direction()
-	
-	direction = target_location - transform.get_origin()
 
+	if ((target_location.x - transform.get_origin().x) > 0):
+		direction.x = 1
+	else:
+		direction.x = -1
+	
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 
@@ -45,5 +48,7 @@ func _physics_process(delta):
 func switch_direction():
 	if target_location == movement_area:
 		target_location = spawn_point
+		$Sprite.set_flip_h(false)
 	else:
 		target_location = movement_area
+		$Sprite.set_flip_h(true)

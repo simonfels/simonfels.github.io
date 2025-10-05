@@ -1,22 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4fbg4whx2wii"]
+[gd_scene load_steps=9 format=3 uid="uid://b4fbg4whx2wii"]
 
 [ext_resource type="Script" uid="uid://82emduyvyq34" path="res://Scripts/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://drhqnb2necmsj" path="res://Sprites/enemy_flying.png" id="2_1f0kj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(20, 45)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_afpow"]
+radius = 6.0
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_287tu"]
+atlas = ExtResource("2_1f0kj")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0830c"]
+atlas = ExtResource("2_1f0kj")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
+atlas = ExtResource("2_1f0kj")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
+atlas = ExtResource("2_1f0kj")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_auwsv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_287tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0830c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghaa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dp5w")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 4.0
+}]
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_7k104")
 speed = 314
 fall_acceleration = 395
 jump_height = 330
 movement_range = 600.0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_h2yge")
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_afpow")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(20, 45.000004)
-texture = SubResource("CanvasTexture_1bvp3")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_auwsv")
+animation = &"flying"
+autoplay = "flying"
+frame_progress = 0.5666832
+flip_h = true

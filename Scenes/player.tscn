@@ -1,12 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://do1emodljcn6b"]
+[gd_scene load_steps=18 format=3 uid="uid://do1emodljcn6b"]
 
 [ext_resource type="Script" uid="uid://8cxpvndjkman" path="res://Scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Shader" uid="uid://b6sjxsn2h45dx" path="res://Scenes/hitflash.gdshader" id="2_fkybt"]
 [ext_resource type="Texture2D" uid="uid://crx3d0x16p3yc" path="res://Sprites/player_idle.png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bkp6pa10jt2mq" path="res://Sprites/player_run.png" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://8fnd33e71dp7" path="res://Scripts/area_2d.gd" id="4_vgqql"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bvp3"]
 radius = 6.0
 height = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x3wgy"]
+shader = ExtResource("2_fkybt")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("2_onrkg")
@@ -77,12 +84,18 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
+size = Vector2(11, 14)
+
 [node name="Player" type="CharacterBody2D"]
 slide_on_ceiling = false
 script = ExtResource("1_4flbx")
 speed = 235
 fall_acceleration = 725
 jump_height = 80
+acceleration = 1.0
+knockback_strength = 200.0
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -92,8 +105,23 @@ shape = SubResource("CapsuleShape2D_1bvp3")
 rect = Rect2(-7, -8, 13, 16)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_x3wgy")
 sprite_frames = SubResource("SpriteFrames_1jxqw")
 animation = &"idle"
-frame_progress = 0.57274985
+autoplay = "idle"
+
+[node name="Area2D" type="Area2D" parent="." groups=["player"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("4_vgqql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_6t5aa")
+
+[node name="IFrames" type="Timer" parent="."]
+wait_time = 0.2
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="timeout" from="IFrames" to="." method="_on_i_frames_timeout"]
