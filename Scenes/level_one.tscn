@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=4 uid="uid://ufr6tam48j27"]
+[gd_scene load_steps=17 format=4 uid="uid://ufr6tam48j27"]
 
-[ext_resource type="Script" uid="uid://ks1bulgy0eq5" path="res://Scenes/level_one.gd" id="1_hi7j2"]
+[ext_resource type="Script" uid="uid://ks1bulgy0eq5" path="res://Scripts/level_one.gd" id="1_hi7j2"]
 [ext_resource type="Texture2D" uid="uid://7gk8fukkg8bl" path="res://Tilemaps/tilemap.png" id="1_ojold"]
 [ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="2_bo08i"]
 [ext_resource type="Texture2D" uid="uid://dqsqbthtsb15h" path="res://Sprites/seelenbecken-idle.png" id="4_ik1yt"]
+[ext_resource type="Texture2D" uid="uid://cwtng2jpfix08" path="res://Sprites/progressbarFramesSeele/soul1.png" id="5_3lrk7"]
+[ext_resource type="Script" uid="uid://demoon8sr2r0p" path="res://Scripts/texture_progress_bar.gd" id="6_gni6d"]
+[ext_resource type="Texture2D" uid="uid://bg5baoin77fjs" path="res://Sprites/progressbarFramesSeele/soul2.png" id="6_y3aq0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo08i"]
 texture = ExtResource("1_ojold")
@@ -231,9 +234,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="level_one" type="Node2D" node_paths=PackedStringArray("SoulSpawnpoints")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ik1yt"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_ys0qe"]
+frames = 2
+speed_scale = 3.0
+frame_0/texture = ExtResource("5_3lrk7")
+frame_1/texture = ExtResource("6_y3aq0")
+frame_1/duration = 1.0
+
+[node name="level_one" type="Node2D" node_paths=PackedStringArray("SoulSpawnpoints", "SeelenbeckenTimer")]
 script = ExtResource("1_hi7j2")
 SoulSpawnpoints = [NodePath("SoulSpawnpoints/Spawnmarker1"), NodePath("SoulSpawnpoints/Spawnmarker2"), NodePath("SoulSpawnpoints/Spawnmarker3"), NodePath("SoulSpawnpoints/Spawnmarker4")]
+SeelenbeckenTimer = NodePath("SeelenbeckenPos/Seelenbecken/TextureProgressBar/Timer")
 
 [node name="layer_holder" type="Node" parent="."]
 
@@ -256,25 +269,25 @@ zoom = Vector2(5, 5)
 [node name="SoulSpawnpoints" type="Node" parent="."]
 
 [node name="Spawnmarker1" type="Marker2D" parent="SoulSpawnpoints"]
-position = Vector2(-100, -73)
+position = Vector2(-100, -72)
 
 [node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker1"]
 position = Vector2(74, -16)
 
 [node name="Spawnmarker2" type="Marker2D" parent="SoulSpawnpoints"]
-position = Vector2(168, 104)
+position = Vector2(170, 104)
 
 [node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker2"]
 position = Vector2(91, -35)
 
 [node name="Spawnmarker3" type="Marker2D" parent="SoulSpawnpoints"]
-position = Vector2(544, -89)
+position = Vector2(539, -88)
 
 [node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker3"]
-position = Vector2(-139, -3)
+position = Vector2(-135, -3)
 
 [node name="Spawnmarker4" type="Marker2D" parent="SoulSpawnpoints"]
-position = Vector2(508, 40)
+position = Vector2(503, 40)
 
 [node name="Marker2D" type="Marker2D" parent="SoulSpawnpoints/Spawnmarker4"]
 position = Vector2(-88, -1)
@@ -287,3 +300,28 @@ position = Vector2(16, -16)
 sprite_frames = SubResource("SpriteFrames_y3aq0")
 autoplay = "default"
 frame_progress = 0.64361614
+
+[node name="Area2D" type="Area2D" parent="SeelenbeckenPos/Seelenbecken"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeelenbeckenPos/Seelenbecken/Area2D"]
+position = Vector2(5.9604645e-08, 5.9999995)
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_ik1yt")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SeelenbeckenPos/Seelenbecken" node_paths=PackedStringArray("seelenbeckenTimer")]
+offset_left = -8.0
+offset_top = -20.0
+offset_right = 8.0
+offset_bottom = -4.0
+fill_mode = 3
+texture_progress = SubResource("AnimatedTexture_ys0qe")
+tint_progress = Color(0.24596149, 1.2453423, 0.9343105, 1)
+script = ExtResource("6_gni6d")
+seelenbeckenTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="SeelenbeckenPos/Seelenbecken/TextureProgressBar"]
+
+[connection signal="body_shape_entered" from="SeelenbeckenPos/Seelenbecken/Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="SeelenbeckenPos/Seelenbecken/Area2D" to="." method="_on_area_2d_body_shape_exited"]
+[connection signal="completed" from="SeelenbeckenPos/Seelenbecken/TextureProgressBar" to="." method="_on_texture_progress_bar_completed"]
+[connection signal="timeout" from="SeelenbeckenPos/Seelenbecken/TextureProgressBar/Timer" to="SeelenbeckenPos/Seelenbecken/TextureProgressBar" method="_on_timer_timeout"]
