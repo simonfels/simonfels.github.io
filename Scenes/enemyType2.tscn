@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://s02txn0wuh1a"]
+
+[ext_resource type="Script" uid="uid://cwl6ajyl4thdj" path="res://Scenes/enemy_smart.gd" id="1_qqvp5"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1bvp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(20, 45)
+
+[node name="Enemy" type="CharacterBody2D"]
+wall_min_slide_angle = 0.10646509
+platform_floor_layers = 4294967294
+platform_wall_layers = 1
+script = ExtResource("1_qqvp5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 45.000004)
+texture = SubResource("CanvasTexture_1bvp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.476
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

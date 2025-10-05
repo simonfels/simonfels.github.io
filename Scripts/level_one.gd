@@ -9,6 +9,7 @@ signal soulCaptureProgressTick
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$layer_holder/TileMapLayer.modulate = Color.PINK
 	var rand = randi_range(1,SoulSpawnpoints.size()) - 1
 	activeMarker = SoulSpawnpoints[rand]
 	$SeelenbeckenPos.position = activeMarker.position
