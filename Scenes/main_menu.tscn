@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://bep1hm56p4wgd"]
+[gd_scene load_steps=12 format=3 uid="uid://bep1hm56p4wgd"]
 
 [ext_resource type="Script" uid="uid://fer60wmghqmr" path="res://Scripts/main_menu.gd" id="1_n45e2"]
-[ext_resource type="Texture2D" uid="uid://bn7w5tm7qyvmv" path="res://Sprites/Controls.png" id="2_opfnp"]
-[ext_resource type="Texture2D" uid="uid://bmih1cnxyk853" path="res://Sprites/Artifact-Title.png" id="3_cp0ys"]
-[ext_resource type="Texture2D" uid="uid://x4v1hewbopik" path="res://Sprites/Artifact-Shop.png" id="4_yhxw7"]
-[ext_resource type="Texture2D" uid="uid://7sln5gd4d5lf" path="res://Sprites/Start-Button.png" id="5_trj04"]
+[ext_resource type="Texture2D" uid="uid://btmbyj4m56l86" path="res://Sprites/start_button.png" id="2_16hvj"]
 [ext_resource type="Texture2D" uid="uid://dmgihidoy1gx0" path="res://Sprites/bg1.png" id="6_opfnp"]
+[ext_resource type="Texture2D" uid="uid://bu8y0f2ea7k4r" path="res://Sprites/item_2.png" id="7_16hvj"]
 [ext_resource type="Texture2D" uid="uid://c4k80itsdgimj" path="res://Sprites/item_1.png" id="7_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://vhqq0prpfqxg" path="res://Sprites/item_3.png" id="8_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://igvsbav5flh7" path="res://Sprites/item_4.png" id="9_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://cunwbk78cr43w" path="res://Sprites/treasure_collection.png" id="9_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://b0dx4fpirgp7p" path="res://Sprites/item_5.png" id="10_5egv6"]
+[ext_resource type="Texture2D" uid="uid://bseh7lj0gan3v" path="res://Sprites/controls.png" id="10_t1dhk"]
 
 [sub_resource type="Theme" id="Theme_glbon"]
 
@@ -15,67 +18,15 @@ script = ExtResource("1_n45e2")
 
 [node name="Buttons_Texts" type="Node" parent="."]
 
-[node name="Controls" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(141.00003, -78)
-scale = Vector2(0.6854839, 0.7826087)
-texture = ExtResource("2_opfnp")
+[node name="StartButton2" type="Sprite2D" parent="Buttons_Texts"]
+position = Vector2(0, 84)
+texture = ExtResource("2_16hvj")
 
-[node name="ArtifactTitle" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-112.999985, -116.999985)
-scale = Vector2(0.7969925, 0.79545456)
-texture = ExtResource("3_cp0ys")
-
-[node name="ArtifactShop2" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-126, -63)
-scale = Vector2(0.6971039, 0.64847183)
-texture = ExtResource("4_yhxw7")
-
-[node name="ArtifactShop" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-187, -62.999992)
-scale = Vector2(0.70253164, 0.66049385)
-texture = ExtResource("4_yhxw7")
-
-[node name="Button" type="Button" parent="Buttons_Texts/ArtifactShop"]
-z_index = -1
-offset_left = -32.73873
-offset_top = -33.308426
-offset_right = 34.16217
-offset_bottom = 36.336426
-flat = true
-metadata/_edit_use_anchors_ = true
-
-[node name="ArtifactShop3" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-126.25, 1.75)
-scale = Vector2(0.6971039, 0.64847183)
-texture = ExtResource("4_yhxw7")
-
-[node name="ArtifactShop4" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-187.25, 1.75)
-scale = Vector2(0.70253164, 0.66049385)
-texture = ExtResource("4_yhxw7")
-
-[node name="ArtifactShop5" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-61, -62.999992)
-scale = Vector2(0.70253164, 0.66049385)
-texture = ExtResource("4_yhxw7")
-
-[node name="StartButton" type="Sprite2D" parent="Buttons_Texts"]
-z_index = -1
-position = Vector2(-16, 90)
-texture = ExtResource("5_trj04")
-
-[node name="Button" type="Button" parent="Buttons_Texts/StartButton"]
-offset_left = -68.0
-offset_top = -36.0
-offset_right = 70.0
-offset_bottom = 35.0
+[node name="Button" type="Button" parent="Buttons_Texts/StartButton2"]
+offset_left = -50.0
+offset_top = -25.0
+offset_right = 50.0
+offset_bottom = 26.0
 theme = SubResource("Theme_glbon")
 flat = true
 
@@ -87,8 +38,83 @@ texture = ExtResource("6_opfnp")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Artifact1" type="Sprite2D" parent="."]
-position = Vector2(-183, -60)
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-200, -67)
+scale = Vector2(2, 2)
 texture = ExtResource("7_cp0ys")
 
-[connection signal="button_down" from="Buttons_Texts/ArtifactShop/Button" to="." method="_on_buy_articact1"]
-[connection signal="button_down" from="Buttons_Texts/StartButton/Button" to="." method="_on_start_button"]
+[node name="Button" type="Button" parent="Artifact1"]
+z_index = -1
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+flat = true
+
+[node name="Artifact2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-161, -67)
+scale = Vector2(2, 2)
+texture = ExtResource("7_16hvj")
+
+[node name="Button" type="Button" parent="Artifact2"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Artifact3" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-123, -67)
+scale = Vector2(2, 2)
+texture = ExtResource("8_vr1f0")
+
+[node name="Button" type="Button" parent="Artifact3"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+flat = true
+
+[node name="Artifact4" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-77, -67)
+scale = Vector2(2, 2)
+texture = ExtResource("9_t1dhk")
+
+[node name="Button" type="Button" parent="Artifact4"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+flat = true
+
+[node name="Artifact5" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-30, -67)
+scale = Vector2(2, 2)
+texture = ExtResource("10_5egv6")
+
+[node name="Button" type="Button" parent="Artifact5"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+flat = true
+
+[node name="TreasureCollection" type="Sprite2D" parent="."]
+position = Vector2(-102, -123)
+texture = ExtResource("9_vr1f0")
+
+[node name="Controls" type="Sprite2D" parent="."]
+position = Vector2(131, -46)
+texture = ExtResource("10_t1dhk")
+
+[connection signal="button_down" from="Buttons_Texts/StartButton2/Button" to="." method="_on_start_button"]
+[connection signal="button_down" from="Artifact1/Button" to="." method="_on_buy_articact1"]
+[connection signal="button_down" from="Artifact2/Button" to="." method="_on_buy_articact2"]
+[connection signal="button_down" from="Artifact3/Button" to="." method="_on_buy_articact3"]
+[connection signal="button_down" from="Artifact4/Button" to="." method="_on_buy_articact4"]
+[connection signal="button_down" from="Artifact5/Button" to="." method="_on_buy_articact5"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmih1cnxyk853"
-path="res://.godot/imported/Artifact-Title.png-338d984fc8d24d566e2ffaa24fdf69d3.ctex"
+uid="uid://cunwbk78cr43w"
+path="res://.godot/imported/treasure_collection.png-d4046692d5a11feeb1f11cf6f1acce4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Artifact-Title.png"
-dest_files=["res://.godot/imported/Artifact-Title.png-338d984fc8d24d566e2ffaa24fdf69d3.ctex"]
+source_file="res://Sprites/treasure_collection.png"
+dest_files=["res://.godot/imported/treasure_collection.png-d4046692d5a11feeb1f11cf6f1acce4e.ctex"]
 
 [params]
 

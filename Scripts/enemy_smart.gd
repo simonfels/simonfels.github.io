@@ -8,7 +8,6 @@ var target: Node2D
 var isAlive = true
 
 func _ready():
-
 	target = get_tree().current_scene.find_child("Player")
 	print_debug(target)
 

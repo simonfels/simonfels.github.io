@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x4v1hewbopik"
-path="res://.godot/imported/Artifact-Shop.png-34d9b7abfb19858adac8b41797fd04b3.ctex"
+uid="uid://djjrp71udat7"
+path="res://.godot/imported/credits.png-e6d9b6de130a4049a1f1a9d601bb5bed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Artifact-Shop.png"
-dest_files=["res://.godot/imported/Artifact-Shop.png-34d9b7abfb19858adac8b41797fd04b3.ctex"]
+source_file="res://Sprites/credits.png"
+dest_files=["res://.godot/imported/credits.png-e6d9b6de130a4049a1f1a9d601bb5bed.ctex"]
 
 [params]
 

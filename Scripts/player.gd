@@ -154,6 +154,8 @@ func _on_i_frames_timeout():
 	$Sprite.material.set_shader_parameter("flash_modifier", 0)
 
 func spawn_projectile() -> void:
+	if not projectile_unlocked:
+		return
 	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
 	projectile.global_position = $Weapon/Marker2D.global_position
 	projectile.damage = projectile_damage * damage_multi
