@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://qqmyp5s04jyi"]
+[gd_scene load_steps=16 format=3 uid="uid://qqmyp5s04jyi"]
 
 [ext_resource type="Script" uid="uid://cwl6ajyl4thdj" path="res://Scripts/enemy_smart.gd" id="1_qqvp5"]
 [ext_resource type="Texture2D" uid="uid://drhqnb2necmsj" path="res://Sprites/enemy_flying.png" id="2_7jrix"]
 [ext_resource type="Shader" uid="uid://b6sjxsn2h45dx" path="res://Scenes/hitflash.gdshader" id="2_262vp"]
+[ext_resource type="Texture2D" uid="uid://d04nvm2vl4a5u" path="res://Sprites/enemy_health.png" id="4_scs7f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7jrix"]
 radius = 4.5
@@ -128,7 +129,7 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_262vp"]
 radius = 6.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthBar")]
 z_index = 1
 collision_layer = 2
 collision_mask = 2
@@ -137,6 +138,7 @@ platform_floor_layers = 4294967294
 platform_wall_layers = 1
 script = ExtResource("1_qqvp5")
 speed = 3000.0
+HealthBar = NodePath("TextureProgressBar")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1.5)
@@ -174,6 +176,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_262vp")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -9.0
+offset_top = -18.0
+offset_right = 9.0
+offset_bottom = -15.0
+value = 100.0
+texture_progress = ExtResource("4_scs7f")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HitFlash" to="." method="_on_hit_flash_timeout"]

@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var attack_damage = 100.0
 @export var projectile_damage = 50.0
 @export var attack_speed = 1.0
+@export var HealthBar: TextureProgressBar 
 
 var target_velocity = Vector2.ZERO
 var spawn_point = Vector2.ZERO
@@ -42,6 +43,9 @@ func _ready():
 	
 	if SaveState.artifact4:
 		attack_speed_multi = 2.0
+	
+	HealthBar.max_value = health
+	HealthBar.value = health
 
 func _process(_delta):
 	if $Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale != (attack_speed * attack_speed_multi):
@@ -125,28 +129,22 @@ func activateWeaponHitbox() -> void:
 func deactivateWeaponHitbox() -> void:
 	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	respawn()
-
 func take_damage(damage):
 	health -= damage
+	
+	HealthBar.value = health
 
 	if health <= 0:
-		respawn()
 		health = 100
 	else:
 		$Sprite.material.set_shader_parameter("flash_modifier", 1)
 		$IFrames.start()
 
-func respawn():
-	transform = spawn_point
-
-
 func apply_knockback(direction: Vector2) -> void:
 	if not $IFrames.is_stopped():
 		return
 
-	take_damage(20 * (currentLevel / 2 ))
+	take_damage(20 * (1 + (currentLevel / 2 )))
 	is_knocked_back = true
 	knockback_timer = knockback_duration
 	knockback_velocity = direction * knockback_strength

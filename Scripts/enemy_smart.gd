@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 1700.0
 @onready var nav := $NavigationAgent2D as NavigationAgent2D
+@export var HealthBar: TextureProgressBar
 var maxHealth = 100
 var health = 100
 var target: Node2D
@@ -11,6 +12,8 @@ func _ready():
 	var currentLevel = SaveState.level
 	maxHealth = maxHealth * (1 + (currentLevel / 4))
 	health = health * (1 + (currentLevel / 4))
+	HealthBar.max_value = maxHealth
+	HealthBar.value = health
 	target = get_tree().current_scene.find_child("Player")
 	print_debug(target)
 
@@ -42,6 +45,7 @@ func take_damage(damage) -> void:
 		isAlive = false
 	else:
 		$HitFlash.start()
+		HealthBar.value = health
 
 func die() -> void:
 	queue_free()
