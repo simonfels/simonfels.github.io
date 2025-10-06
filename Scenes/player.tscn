@@ -158,7 +158,7 @@ _data = {
 radius = 7.0686316
 height = 28.274527
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 4
 slide_on_ceiling = false
 script = ExtResource("1_4flbx")

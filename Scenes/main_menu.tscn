@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://igvsbav5flh7" path="res://Sprites/item_4.png" id="9_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://cunwbk78cr43w" path="res://Sprites/treasure_collection.png" id="9_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://b0dx4fpirgp7p" path="res://Sprites/item_5.png" id="10_5egv6"]
-[ext_resource type="Texture2D" uid="uid://bseh7lj0gan3v" path="res://Sprites/controls.png" id="10_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://ca17l74408atw" path="res://Sprites/controls.png" id="10_t1dhk"]
 
 [sub_resource type="Theme" id="Theme_glbon"]
 

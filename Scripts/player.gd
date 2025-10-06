@@ -114,7 +114,7 @@ func activateWeaponHitbox() -> void:
 	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", false)
 
 func deactivateWeaponHitbox() -> void:
-	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", false)
+	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	respawn()
@@ -154,6 +154,7 @@ func _on_i_frames_timeout():
 	$Sprite.material.set_shader_parameter("flash_modifier", 0)
 
 func spawn_projectile() -> void:
+	print_debug(projectile_unlocked)
 	if not projectile_unlocked:
 		return
 	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
