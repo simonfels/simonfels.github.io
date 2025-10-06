@@ -27,6 +27,7 @@ var projectile_unlocked = false
 var double_jump_unlocked = false
 var damage_multi = 1.0
 var attack_speed_multi = 1.0
+var double_jumped = false
 
 func _ready():
 	spawn_point = transform
@@ -44,6 +45,8 @@ func _process(_delta):
 		$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale = attack_speed * attack_speed_multi
 
 func _physics_process(delta):
+	if is_on_floor():
+		double_jumped = false
 	if is_knocked_back:
 		# Während Knockback keine Eingaben zulassen
 		velocity = knockback_velocity
@@ -86,6 +89,9 @@ func _physics_process(delta):
 		apply_gravity(delta)
 
 		if Input.is_action_just_pressed("jump") and is_on_floor():
+			target_velocity.y = -sqrt(jump_height * 2.0 * fall_acceleration)
+		elif double_jump_unlocked and not double_jumped and Input.is_action_just_pressed("jump") and not is_on_floor():
+			double_jumped = true
 			target_velocity.y = -sqrt(jump_height * 2.0 * fall_acceleration)
 
 		# Moving the Character
@@ -154,7 +160,6 @@ func _on_i_frames_timeout():
 	$Sprite.material.set_shader_parameter("flash_modifier", 0)
 
 func spawn_projectile() -> void:
-	print_debug(projectile_unlocked)
 	if not projectile_unlocked:
 		return
 	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
