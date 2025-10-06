@@ -134,39 +134,32 @@ tracks/1/path = NodePath("../../..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.33333334, 0.4, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
+"method": &"activateWeaponHitbox"
+}, {
+"args": [],
 "method": &"spawn_projectile"
+}, {
+"args": [],
+"method": &"deactivateWeaponHitbox"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_8erm5"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8erm5"]
 _data = {
 &"RESET": SubResource("Animation_3smsa"),
-&"attack": SubResource("Animation_x3wgy"),
-&"idle": SubResource("Animation_8erm5")
+&"attack": SubResource("Animation_x3wgy")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3wgy"]
+radius = 7.0686316
+height = 28.274527
+
 [node name="Player" type="CharacterBody2D"]
-z_index = 1
+z_index = 4
 slide_on_ceiling = false
 script = ExtResource("1_4flbx")
 speed = 235
@@ -193,7 +186,6 @@ autoplay = "idle"
 frame_progress = 0.5307519
 
 [node name="Area2D" type="Area2D" parent="." groups=["player"]]
-visible = false
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("4_vgqql")
@@ -222,10 +214,22 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="Hitbox" type="Area2D" parent="Weapon/WeaponAnimation"]
+position = Vector2(0, -1)
+collision_layer = 14
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/WeaponAnimation/Hitbox"]
+position = Vector2(-7.0000005, -14)
+rotation = 1.4026512
+shape = SubResource("CapsuleShape2D_x3wgy")
+disabled = true
+
 [node name="Marker2D" type="Marker2D" parent="Weapon"]
 position = Vector2(16, 1)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_enemy_attack"]
 [connection signal="timeout" from="IFrames" to="." method="_on_i_frames_timeout"]
 [connection signal="animation_finished" from="Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Weapon/WeaponAnimation/Hitbox" to="." method="_on_weapon_hit_enemy"]

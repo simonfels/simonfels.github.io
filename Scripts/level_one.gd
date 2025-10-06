@@ -29,5 +29,9 @@ func _on_timer_timeout() -> void:
 	soulCaptureProgressTick.emit()
 	
 	var enemy = preload("res://Scenes/enemyType2.tscn").instantiate()
-	enemy.global_position = activeMarker.get_child(0).global_position
+	var mob_spawn_location = $Path2D/PathFollow2D
+	mob_spawn_location.progress_ratio = randf()
+
+	# Set the mob's position to the random location.
+	enemy.position = mob_spawn_location.position
 	get_tree().current_scene.add_child(enemy)

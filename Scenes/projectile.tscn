@@ -83,4 +83,4 @@ shape = SubResource("CircleShape2D_yr2qt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="WallCollider" to="." method="_on_wall_entered"]
-[connection signal="body_entered" from="EnemyCollider" to="." method="_on_enemy_hit"]
+[connection signal="area_entered" from="EnemyCollider" to="." method="_on_enemy_hit"]

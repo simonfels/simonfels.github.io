@@ -5,7 +5,9 @@ extends CharacterBody2D
 @export var jump_height = 200
 @export var acceleration = 10.0
 @export var projectile_speed = 200.0
-@export var attack_damage = 50.0
+@export var attack_damage = 100.0
+@export var projectile_damage = 50.0
+@export var attack_speed = 1.0
 
 var target_velocity = Vector2.ZERO
 var spawn_point = Vector2.ZERO
@@ -20,9 +22,14 @@ var is_knocked_back = false
 var knockback_timer = 0.0
 var knockback_velocity = Vector2.ZERO
 var attacking = false
+var autoattack = false
 
 func _ready():
 	spawn_point = transform
+	
+func _process(delta):
+	if $Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale != attack_speed:
+		$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale = attack_speed
 
 func _physics_process(delta):
 	if is_knocked_back:
@@ -79,11 +86,23 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("attack"):
-		$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.play("attack")
 		attacking = true
-		$Weapon.look_at(get_global_mouse_position())
-		if facing_direction == -1:
-			$Weapon.rotate(PI)
+		autoattack = true
+		attack()
+	elif event.is_action_released("attack"):
+		autoattack = false
+
+func attack() -> void:
+	$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.play("attack")
+	$Weapon.look_at(get_global_mouse_position())
+	if facing_direction == -1:
+		$Weapon.rotate(PI)
+
+func activateWeaponHitbox() -> void:
+	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", false)
+
+func deactivateWeaponHitbox() -> void:
+	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	respawn()
@@ -125,7 +144,7 @@ func _on_i_frames_timeout():
 func spawn_projectile() -> void:
 	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
 	projectile.global_position = $Weapon/Marker2D.global_position
-	projectile.damage = attack_damage
+	projectile.damage = projectile_damage
 	var mouse_pos = get_global_mouse_position()
 	var direction = (mouse_pos - projectile.global_position).normalized()
 	projectile.linear_velocity = direction * projectile_speed
@@ -134,4 +153,14 @@ func spawn_projectile() -> void:
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "attack":
-		attacking = false
+		if not autoattack:
+			attacking = false
+		else:
+			attack()
+
+func change_attack_speed(new_attack_speed: float) -> void:
+	attack_speed = new_attack_speed
+
+func _on_weapon_hit_enemy(body: Area2D) -> void:
+	if body.is_in_group("enemy"):
+		body.get_parent().take_damage(attack_damage)

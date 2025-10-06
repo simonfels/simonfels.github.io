@@ -36,6 +36,7 @@ func take_damage(damage) -> void:
 	if health <= 0:
 		$AnimationPlayer.play("die")
 		$CollisionShape2D.set_deferred("disabled", true)
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		isAlive = false
 	else:
 		$HitFlash.start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://qqmyp5s04jyi"]
+[gd_scene load_steps=15 format=3 uid="uid://qqmyp5s04jyi"]
 
 [ext_resource type="Script" uid="uid://cwl6ajyl4thdj" path="res://Scripts/enemy_smart.gd" id="1_qqvp5"]
 [ext_resource type="Texture2D" uid="uid://drhqnb2necmsj" path="res://Sprites/enemy_flying.png" id="2_7jrix"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7jrix"]
 radius = 4.5
-height = 23.0
+height = 19.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scs7f"]
 resource_local_to_scene = true
@@ -125,7 +125,11 @@ _data = {
 &"die": SubResource("Animation_262vp")
 }
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_262vp"]
+radius = 6.0
+
+[node name="Enemy" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 2
 wall_min_slide_angle = 0.10646509
@@ -161,6 +165,14 @@ one_shot = true
 libraries = {
 &"": SubResource("AnimationLibrary_1g187")
 }
+
+[node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_262vp")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HitFlash" to="." method="_on_hit_flash_timeout"]
