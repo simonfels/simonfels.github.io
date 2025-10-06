@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://cb1fvdaiht7v0"]
+
+[ext_resource type="Texture2D" uid="uid://dqsqbthtsb15h" path="res://Sprites/seelenbecken-idle.png" id="1_cbtym"]
+[ext_resource type="Script" uid="uid://b6o7wgvlmg8kf" path="res://Scripts/seelenbecken.gd" id="1_gu6r3"]
+[ext_resource type="Texture2D" uid="uid://cwtng2jpfix08" path="res://Sprites/progressbarFramesSeele/soul1.png" id="2_gu6r3"]
+[ext_resource type="Texture2D" uid="uid://bg5baoin77fjs" path="res://Sprites/progressbarFramesSeele/soul2.png" id="3_pc0gv"]
+[ext_resource type="Script" uid="uid://demoon8sr2r0p" path="res://Scripts/texture_progress_bar.gd" id="4_8fqc4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik1yt"]
+atlas = ExtResource("1_cbtym")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7vm3"]
+atlas = ExtResource("1_cbtym")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gni6d"]
+atlas = ExtResource("1_cbtym")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lrk7"]
+atlas = ExtResource("1_cbtym")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y3aq0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik1yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7vm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gni6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lrk7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ik1yt"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_ys0qe"]
+frames = 2
+speed_scale = 3.0
+frame_0/texture = ExtResource("2_gu6r3")
+frame_1/texture = ExtResource("3_pc0gv")
+frame_1/duration = 1.0
+
+[node name="SeelenbeckenPos" type="Node2D"]
+script = ExtResource("1_gu6r3")
+TimerDuration = null
+
+[node name="Seelenbecken" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, -16)
+sprite_frames = SubResource("SpriteFrames_y3aq0")
+autoplay = "default"
+frame_progress = 0.64361614
+
+[node name="Area2D" type="Area2D" parent="Seelenbecken"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Seelenbecken/Area2D"]
+position = Vector2(5.9604645e-08, 5.9999995)
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_ik1yt")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Seelenbecken" node_paths=PackedStringArray("seelenbeckenTimer")]
+offset_left = -8.0
+offset_top = -20.0
+offset_right = 8.0
+offset_bottom = -4.0
+fill_mode = 3
+texture_progress = SubResource("AnimatedTexture_ys0qe")
+tint_progress = Color(0.24596149, 1.2453423, 0.9343105, 1)
+script = ExtResource("4_8fqc4")
+seelenbeckenTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Seelenbecken/TextureProgressBar"]
+
+[connection signal="body_shape_entered" from="Seelenbecken/Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Seelenbecken/Area2D" to="." method="_on_area_2d_body_shape_exited"]
+[connection signal="completed" from="Seelenbecken/TextureProgressBar" to="." method="_on_texture_progress_bar_completed"]
+[connection signal="isready" from="Seelenbecken/TextureProgressBar" to="." method="_on_texture_progress_bar_isready"]
+[connection signal="timeout" from="Seelenbecken/TextureProgressBar/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Seelenbecken/TextureProgressBar/Timer" to="Seelenbecken/TextureProgressBar" method="_on_timer_timeout"]

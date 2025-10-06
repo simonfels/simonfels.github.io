@@ -1,12 +1,14 @@
 extends TextureProgressBar
 
-@export var timeInSec: int = 20
 @export var seelenbeckenTimer: Timer
+var seconds = 1
 
 signal completed
+signal isready 
 
 func _ready() -> void:
-	step = 100/timeInSec
+	isready.emit()
+	step = 100/seconds
 	
 
 
