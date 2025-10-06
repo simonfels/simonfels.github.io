@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="collector-ldjam58"
-run/main_scene="uid://ufr6tam48j27"
+run/main_scene="uid://bep1hm56p4wgd"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SaveState="*res://Scripts/save_state.gd"
 
 [display]
 

@@ -23,13 +23,25 @@ var knockback_timer = 0.0
 var knockback_velocity = Vector2.ZERO
 var attacking = false
 var autoattack = false
+var projectile_unlocked = false
+var double_jump_unlocked = false
+var damage_multi = 1.0
+var attack_speed_multi = 1.0
 
 func _ready():
 	spawn_point = transform
+	# 2x Attackspeed (kelch)
+	projectile_unlocked = SaveState.artifact1
+	double_jump_unlocked = SaveState.artifact3
+	if SaveState.artifact2:
+		damage_multi = 2.0
 	
-func _process(delta):
-	if $Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale != attack_speed:
-		$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale = attack_speed
+	if SaveState.artifact4:
+		attack_speed_multi = 2.0
+
+func _process(_delta):
+	if $Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale != (attack_speed * attack_speed_multi):
+		$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.speed_scale = attack_speed * attack_speed_multi
 
 func _physics_process(delta):
 	if is_knocked_back:
@@ -102,7 +114,7 @@ func activateWeaponHitbox() -> void:
 	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", false)
 
 func deactivateWeaponHitbox() -> void:
-	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", true)
+	$Weapon/WeaponAnimation/Hitbox/CollisionShape2D.set_deferred("disabled", false)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	respawn()
@@ -144,7 +156,7 @@ func _on_i_frames_timeout():
 func spawn_projectile() -> void:
 	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
 	projectile.global_position = $Weapon/Marker2D.global_position
-	projectile.damage = projectile_damage
+	projectile.damage = projectile_damage * damage_multi
 	var mouse_pos = get_global_mouse_position()
 	var direction = (mouse_pos - projectile.global_position).normalized()
 	projectile.linear_velocity = direction * projectile_speed
@@ -163,4 +175,4 @@ func change_attack_speed(new_attack_speed: float) -> void:
 
 func _on_weapon_hit_enemy(body: Area2D) -> void:
 	if body.is_in_group("enemy"):
-		body.get_parent().take_damage(attack_damage)
+		body.get_parent().take_damage(attack_damage * damage_multi)
