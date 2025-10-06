@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c50wwvja3d8tj"]
+[gd_scene load_steps=16 format=3 uid="uid://c50wwvja3d8tj"]
 
 [ext_resource type="Texture2D" uid="uid://dqsqbthtsb15h" path="res://Sprites/seelenbecken-idle.png" id="1_cbtym"]
 [ext_resource type="Script" uid="uid://b6o7wgvlmg8kf" path="res://Scripts/seelenbecken.gd" id="1_gu6r3"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bg5baoin77fjs" path="res://Sprites/progressbarFramesSeele/soul2.png" id="3_pc0gv"]
 [ext_resource type="Script" uid="uid://demoon8sr2r0p" path="res://Scripts/texture_progress_bar.gd" id="4_8fqc4"]
 [ext_resource type="Texture2D" uid="uid://y5ttbi0gsjby" path="res://Sprites/seelenbecken-radius.png" id="6_pc0gv"]
+[ext_resource type="AudioStream" uid="uid://dbsy1j8gweqgt" path="res://Sound/event_start.wav" id="7_772hg"]
+[ext_resource type="AudioStream" uid="uid://ck1h6kax3t7j1" path="res://Sound/event_end.wav" id="8_57scw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ik1yt"]
 atlas = ExtResource("1_cbtym")
@@ -84,6 +86,12 @@ seelenbeckenTimer = NodePath("Timer")
 [node name="SeelenbeckenRadius" type="Sprite2D" parent="Seelenbecken"]
 position = Vector2(0, 6)
 texture = ExtResource("6_pc0gv")
+
+[node name="EnterAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_772hg")
+
+[node name="EndAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_57scw")
 
 [connection signal="body_shape_entered" from="Seelenbecken/Area2D" to="." method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Seelenbecken/Area2D" to="." method="_on_area_2d_body_shape_exited"]

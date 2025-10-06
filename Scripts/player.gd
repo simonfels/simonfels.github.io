@@ -96,8 +96,10 @@ func _physics_process(delta):
 		apply_gravity(delta)
 
 		if Input.is_action_just_pressed("jump") and is_on_floor():
+			$PlayerJump.play()
 			target_velocity.y = -sqrt(jump_height * 2.0 * fall_acceleration)
 		elif double_jump_unlocked and not double_jumped and Input.is_action_just_pressed("jump") and not is_on_floor():
+			$PlayerJump.play()
 			double_jumped = true
 			target_velocity.y = -sqrt(jump_height * 2.0 * fall_acceleration)
 
@@ -133,6 +135,7 @@ func take_damage(damage):
 	health -= damage
 	
 	HealthBar.value = health
+	$PlayerHurt.play()
 
 	if health <= 0:
 		SaveState.level = 1
