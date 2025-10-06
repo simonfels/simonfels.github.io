@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://igvsbav5flh7" path="res://Sprites/item_4.png" id="9_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://cunwbk78cr43w" path="res://Sprites/treasure_collection.png" id="9_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://b0dx4fpirgp7p" path="res://Sprites/item_5.png" id="10_5egv6"]
-[ext_resource type="Texture2D" uid="uid://ca17l74408atw" path="res://Sprites/controls.png" id="10_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://ca17l74408atw" path="res://Sprites/Controls.png" id="10_t1dhk"]
 
 [sub_resource type="Theme" id="Theme_glbon"]
 
@@ -43,12 +43,12 @@ position = Vector2(-200, -67)
 scale = Vector2(2, 2)
 texture = ExtResource("7_cp0ys")
 
-[node name="Button" type="Button" parent="Artifact1"]
-z_index = -1
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Button5" type="Button" parent="."]
+offset_left = -210.0
+offset_top = -82.0
+offset_right = -190.0
+offset_bottom = -51.0
+text = "1"
 flat = true
 
 [node name="Artifact2" type="Sprite2D" parent="."]
@@ -57,11 +57,12 @@ position = Vector2(-161, -67)
 scale = Vector2(2, 2)
 texture = ExtResource("7_16hvj")
 
-[node name="Button" type="Button" parent="Artifact2"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Button4" type="Button" parent="."]
+offset_left = -171.0
+offset_top = -82.0
+offset_right = -151.0
+offset_bottom = -51.0
+text = "2"
 flat = true
 metadata/_edit_use_anchors_ = true
 
@@ -71,11 +72,12 @@ position = Vector2(-123, -67)
 scale = Vector2(2, 2)
 texture = ExtResource("8_vr1f0")
 
-[node name="Button" type="Button" parent="Artifact3"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Button3" type="Button" parent="."]
+offset_left = -134.0
+offset_top = -83.0
+offset_right = -114.0
+offset_bottom = -52.0
+text = "3"
 flat = true
 
 [node name="Artifact4" type="Sprite2D" parent="."]
@@ -84,11 +86,12 @@ position = Vector2(-77, -67)
 scale = Vector2(2, 2)
 texture = ExtResource("9_t1dhk")
 
-[node name="Button" type="Button" parent="Artifact4"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Button2" type="Button" parent="."]
+offset_left = -88.0
+offset_top = -83.0
+offset_right = -68.0
+offset_bottom = -52.0
+text = "4"
 flat = true
 
 [node name="Artifact5" type="Sprite2D" parent="."]
@@ -97,11 +100,13 @@ position = Vector2(-30, -67)
 scale = Vector2(2, 2)
 texture = ExtResource("10_5egv6")
 
-[node name="Button" type="Button" parent="Artifact5"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+[node name="Button" type="Button" parent="."]
+offset_left = -38.0
+offset_top = -85.0
+offset_right = -18.0
+offset_bottom = -54.0
+theme_type_variation = &"FlatButton"
+text = "5"
 flat = true
 
 [node name="TreasureCollection" type="Sprite2D" parent="."]
@@ -112,9 +117,23 @@ texture = ExtResource("9_vr1f0")
 position = Vector2(131, -46)
 texture = ExtResource("10_t1dhk")
 
+[node name="Label" type="Label" parent="."]
+offset_left = -211.0
+offset_top = -21.0
+offset_right = -161.0
+offset_bottom = 2.0
+text = "Souls: "
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -164.0
+offset_top = -20.0
+offset_right = -124.0
+offset_bottom = 3.0
+text = "0"
+
 [connection signal="button_down" from="Buttons_Texts/StartButton2/Button" to="." method="_on_start_button"]
-[connection signal="button_down" from="Artifact1/Button" to="." method="_on_buy_articact1"]
-[connection signal="button_down" from="Artifact2/Button" to="." method="_on_buy_articact2"]
-[connection signal="button_down" from="Artifact3/Button" to="." method="_on_buy_articact3"]
-[connection signal="button_down" from="Artifact4/Button" to="." method="_on_buy_articact4"]
-[connection signal="button_down" from="Artifact5/Button" to="." method="_on_buy_articact5"]
+[connection signal="button_down" from="Button5" to="." method="_on_buy_articact1"]
+[connection signal="button_down" from="Button4" to="." method="_on_buy_articact2"]
+[connection signal="button_down" from="Button3" to="." method="_on_buy_articact3"]
+[connection signal="button_down" from="Button2" to="." method="_on_buy_articact4"]
+[connection signal="button_down" from="Button" to="." method="_on_buy_articact5"]
