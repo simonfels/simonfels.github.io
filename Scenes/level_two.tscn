@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bmc1xedmrbq0u"]
+[gd_scene load_steps=9 format=4 uid="uid://b25wt0f33xy0d"]
 
 [ext_resource type="Script" uid="uid://lmqc4efq7qgq" path="res://Scripts/level_two.gd" id="1_hwt33"]
 [ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="2_8jpcs"]
@@ -320,5 +320,6 @@ curve = SubResource("Curve2D_hwt33")
 position = Vector2(100, -17)
 rotation = 0.7687331
 
+[connection signal="levelCompleted" from="." to="." method="_on_level_completed"]
 [connection signal="completed" from="Seelenbecken" to="." method="_on_seelenbecken_completed"]
 [connection signal="timerTick" from="Seelenbecken" to="." method="_on_seelenbecken_timer_tick"]

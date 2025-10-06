@@ -6,7 +6,7 @@ var artifact3 = false
 var artifact4 = false
 var artifact5 = false
 var level = 1
-var souls = 0
+var souls = 4
 
 func nextLevel() -> void:
 	level += 1

@@ -31,3 +31,9 @@ func _on_seelenbecken_timer_tick() -> void:
 
 func _on_seelenbecken_completed() -> void:
 	levelCompleted.emit()
+
+
+func _on_level_completed():
+	SaveState.addSoul()
+	SaveState.nextLevel()
+	get_tree().change_scene_to_file("res://Scenes/level_two.tscn")

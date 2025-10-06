@@ -135,7 +135,8 @@ func take_damage(damage):
 	HealthBar.value = health
 
 	if health <= 0:
-		health = 100
+		SaveState.level = 1
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 	else:
 		$Sprite.material.set_shader_parameter("flash_modifier", 1)
 		$IFrames.start()

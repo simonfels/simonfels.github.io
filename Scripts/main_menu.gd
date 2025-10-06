@@ -2,6 +2,21 @@ extends Node2D
 
 func _ready():
 	updateSoulLabel()
+	if SaveState.artifact1:
+		$Button5.queue_free()
+		$Artifact1.modulate = Color.WHITE
+	if SaveState.artifact2:
+		$Button4.queue_free()
+		$Artifact2.modulate = Color.WHITE
+	if SaveState.artifact3:
+		$Button3.queue_free()
+		$Artifact3.modulate = Color.WHITE
+	if SaveState.artifact4:
+		$Button2.queue_free()
+		$Artifact4.modulate = Color.WHITE
+	if SaveState.artifact5:
+		$Button.queue_free()
+		$Artifact5.modulate = Color.WHITE
 
 func updateSoulLabel():
 	$Label2.text = str(SaveState.souls)

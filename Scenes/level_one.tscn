@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ks1bulgy0eq5" path="res://Scripts/level_one.gd" id="1_hi7j2"]
 [ext_resource type="Texture2D" uid="uid://7gk8fukkg8bl" path="res://Tilemaps/tilemap.png" id="1_ojold"]
 [ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="2_bo08i"]
-[ext_resource type="PackedScene" uid="uid://cb1fvdaiht7v0" path="res://Scenes/seelenbecken.tscn" id="4_gni6d"]
+[ext_resource type="PackedScene" uid="uid://c50wwvja3d8tj" path="res://Scenes/seelenbecken.tscn" id="4_gni6d"]
 [ext_resource type="Texture2D" uid="uid://bqkxy5i1acfdq" path="res://Sprites/bg_static1.png" id="4_y3aq0"]
 [ext_resource type="PackedScene" uid="uid://qqmyp5s04jyi" path="res://Scenes/enemyType2.tscn" id="9_ys0qe"]
 
@@ -259,7 +259,6 @@ position = Vector2(503, 40)
 position = Vector2(-89, -11)
 
 [node name="Seelenbecken" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gni6d")]
-TimerDuration = 20
 Player = NodePath("../Player")
 
 [node name="Enemy" parent="." instance=ExtResource("9_ys0qe")]
@@ -289,5 +288,6 @@ curve = SubResource("Curve2D_ys0qe")
 position = Vector2(185, 58)
 rotation = 0.009803607
 
+[connection signal="levelCompleted" from="." to="." method="_on_level_completed"]
 [connection signal="completed" from="Seelenbecken" to="." method="_on_seelenbecken_completed"]
 [connection signal="timerTick" from="Seelenbecken" to="." method="_on_seelenbecken_timer_tick"]
