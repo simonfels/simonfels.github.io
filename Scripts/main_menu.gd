@@ -48,3 +48,33 @@ func _on_buy_articact5():
 		$Artifact5.modulate = Color.WHITE
 		updateSoulLabel()
 		$Button.queue_free()
+
+func _on_button_5_mouse_entered():
+	$Doublejump.visible = true
+
+func _on_button_5_mouse_exited():
+	$Doublejump.visible = false
+
+func _on_button_4_mouse_entered():
+	$"2Xatkspd".visible = true
+
+func _on_button_4_mouse_exited():
+	$"2Xatkspd".visible = false
+
+func _on_button_3_mouse_entered():
+	$Projectile.visible = true
+
+func _on_button_3_mouse_exited():
+	$Projectile.visible = false
+
+func _on_button_2_mouse_entered():
+	$"2Xdmg".visible = true
+
+func _on_button_2_mouse_exited():
+	$"2Xdmg".visible = false
+
+func _on_button_mouse_entered():
+	$Youwin.visible = true
+
+func _on_button_mouse_exited():
+	$Youwin.visible = false

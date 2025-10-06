@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bep1hm56p4wgd"]
+[gd_scene load_steps=17 format=3 uid="uid://bep1hm56p4wgd"]
 
 [ext_resource type="Script" uid="uid://fer60wmghqmr" path="res://Scripts/main_menu.gd" id="1_n45e2"]
 [ext_resource type="Texture2D" uid="uid://btmbyj4m56l86" path="res://Sprites/start_button.png" id="2_16hvj"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://cunwbk78cr43w" path="res://Sprites/treasure_collection.png" id="9_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://b0dx4fpirgp7p" path="res://Sprites/item_5.png" id="10_5egv6"]
 [ext_resource type="Texture2D" uid="uid://ca17l74408atw" path="res://Sprites/Controls.png" id="10_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://buwp4473xtfp7" path="res://Sprites/doublejump.png" id="11_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://bpipmnrbwfdd" path="res://Sprites/2xatkspd.png" id="12_8dnnj"]
+[ext_resource type="Texture2D" uid="uid://cq0k7b3fniir3" path="res://Sprites/2xdmg.png" id="13_m3bi6"]
+[ext_resource type="Texture2D" uid="uid://sl6hpc278ms5" path="res://Sprites/youwin.png" id="14_wyh8j"]
+[ext_resource type="Texture2D" uid="uid://0vwlokwmske2" path="res://Sprites/projectile.png" id="15_ujyyl"]
 
 [sub_resource type="Theme" id="Theme_glbon"]
 
@@ -44,9 +49,9 @@ scale = Vector2(2, 2)
 texture = ExtResource("7_cp0ys")
 
 [node name="Button5" type="Button" parent="."]
-offset_left = -210.0
+offset_left = -213.0
 offset_top = -82.0
-offset_right = -190.0
+offset_right = -186.0
 offset_bottom = -51.0
 text = "1"
 flat = true
@@ -58,10 +63,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("7_16hvj")
 
 [node name="Button4" type="Button" parent="."]
-offset_left = -171.0
-offset_top = -82.0
-offset_right = -151.0
-offset_bottom = -51.0
+offset_left = -172.595
+offset_top = -82.415
+offset_right = -147.515
+offset_bottom = -50.485
 text = "2"
 flat = true
 metadata/_edit_use_anchors_ = true
@@ -73,10 +78,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("8_vr1f0")
 
 [node name="Button3" type="Button" parent="."]
-offset_left = -134.0
-offset_top = -83.0
-offset_right = -114.0
-offset_bottom = -52.0
+offset_left = -140.0
+offset_top = -84.0
+offset_right = -108.0
+offset_bottom = -50.0
 text = "3"
 flat = true
 
@@ -87,10 +92,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("9_t1dhk")
 
 [node name="Button2" type="Button" parent="."]
-offset_left = -88.0
-offset_top = -83.0
-offset_right = -68.0
-offset_bottom = -52.0
+offset_left = -93.0
+offset_top = -84.0
+offset_right = -61.0
+offset_bottom = -48.0
 text = "4"
 flat = true
 
@@ -101,10 +106,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("10_5egv6")
 
 [node name="Button" type="Button" parent="."]
-offset_left = -38.0
-offset_top = -85.0
-offset_right = -18.0
-offset_bottom = -54.0
+offset_left = -44.0
+offset_top = -86.0
+offset_right = -11.0
+offset_bottom = -51.0
 theme_type_variation = &"FlatButton"
 text = "5"
 flat = true
@@ -131,9 +136,49 @@ offset_right = -124.0
 offset_bottom = 3.0
 text = "0"
 
+[node name="Doublejump" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-148, -38)
+scale = Vector2(2, 2)
+texture = ExtResource("11_vr1f0")
+
+[node name="2Xatkspd" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-96, -36)
+scale = Vector2(2, 2)
+texture = ExtResource("12_8dnnj")
+
+[node name="2Xdmg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-36, -33)
+scale = Vector2(2, 2)
+texture = ExtResource("13_m3bi6")
+
+[node name="Youwin" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(11, -34)
+scale = Vector2(2, 2)
+texture = ExtResource("14_wyh8j")
+
+[node name="Projectile" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-83, -35)
+scale = Vector2(2, 2)
+texture = ExtResource("15_ujyyl")
+
 [connection signal="button_down" from="Buttons_Texts/StartButton2/Button" to="." method="_on_start_button"]
 [connection signal="button_down" from="Button5" to="." method="_on_buy_articact1"]
+[connection signal="mouse_entered" from="Button5" to="." method="_on_button_5_mouse_entered"]
+[connection signal="mouse_exited" from="Button5" to="." method="_on_button_5_mouse_exited"]
 [connection signal="button_down" from="Button4" to="." method="_on_buy_articact2"]
+[connection signal="mouse_entered" from="Button4" to="." method="_on_button_4_mouse_entered"]
+[connection signal="mouse_exited" from="Button4" to="." method="_on_button_4_mouse_exited"]
 [connection signal="button_down" from="Button3" to="." method="_on_buy_articact3"]
+[connection signal="mouse_entered" from="Button3" to="." method="_on_button_3_mouse_entered"]
+[connection signal="mouse_exited" from="Button3" to="." method="_on_button_3_mouse_exited"]
 [connection signal="button_down" from="Button2" to="." method="_on_buy_articact4"]
+[connection signal="mouse_entered" from="Button2" to="." method="_on_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="Button2" to="." method="_on_button_2_mouse_exited"]
 [connection signal="button_down" from="Button" to="." method="_on_buy_articact5"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

@@ -36,12 +36,12 @@ func _ready():
 	currentLevel = SaveState.level
 	spawn_point = transform
 	# 2x Attackspeed (kelch)
-	projectile_unlocked = SaveState.artifact1
-	double_jump_unlocked = SaveState.artifact3
-	if SaveState.artifact2:
+	projectile_unlocked = SaveState.artifact3
+	double_jump_unlocked = SaveState.artifact1
+	if SaveState.artifact4:
 		damage_multi = 2.0
 	
-	if SaveState.artifact4:
+	if SaveState.artifact2:
 		attack_speed_multi = 2.0
 	
 	HealthBar.max_value = health
