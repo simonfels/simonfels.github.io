@@ -27,3 +27,7 @@ func _on_texture_progress_bar_completed() -> void:
 
 func _on_timer_timeout() -> void:
 	soulCaptureProgressTick.emit()
+	
+	var enemy = preload("res://Scenes/enemyType2.tscn").instantiate()
+	enemy.global_position = activeMarker.get_child(0).global_position
+	get_tree().current_scene.add_child(enemy)

@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var fall_acceleration = 75
 @export var jump_height = 200
 @export var acceleration = 10.0
+@export var projectile_speed = 200.0
+@export var attack_damage = 50.0
 
 var target_velocity = Vector2.ZERO
 var spawn_point = Vector2.ZERO
@@ -17,6 +19,7 @@ var max_fall_speed = 200
 var is_knocked_back = false
 var knockback_timer = 0.0
 var knockback_velocity = Vector2.ZERO
+var attacking = false
 
 func _ready():
 	spawn_point = transform
@@ -45,7 +48,7 @@ func _physics_process(delta):
 			if direction.x != facing_direction:
 				facing_direction = direction.x
 				$Sprite.set_flip_h(facing_direction == -1)
-			
+				$Weapon.set_scale(Vector2(facing_direction, 1))
 			if ($Sprite.animation != "run"):
 				$Sprite.animation = "run"
 			direction = direction.normalized()
@@ -68,8 +71,19 @@ func _physics_process(delta):
 
 		# Moving the Character
 		velocity = target_velocity
+		
+		if not attacking:
+			$Weapon.rotation = lerp($Weapon.rotation, round($Weapon.rotation / (2*PI))*(2*PI), 0.2)
+
 		move_and_slide()
 
+func _input(event):
+	if event.is_action_pressed("attack"):
+		$Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer.play("attack")
+		attacking = true
+		$Weapon.look_at(get_global_mouse_position())
+		if facing_direction == -1:
+			$Weapon.rotate(PI)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	respawn()
@@ -89,6 +103,9 @@ func respawn():
 
 
 func apply_knockback(direction: Vector2) -> void:
+	if not $IFrames.is_stopped():
+		return
+
 	take_damage(10)
 	is_knocked_back = true
 	knockback_timer = knockback_duration
@@ -104,3 +121,17 @@ func apply_gravity(delta: float) -> void:
 
 func _on_i_frames_timeout():
 	$Sprite.material.set_shader_parameter("flash_modifier", 0)
+
+func spawn_projectile() -> void:
+	var projectile = preload("res://Scenes/projectile.tscn").instantiate()
+	projectile.global_position = $Weapon/Marker2D.global_position
+	projectile.damage = attack_damage
+	var mouse_pos = get_global_mouse_position()
+	var direction = (mouse_pos - projectile.global_position).normalized()
+	projectile.linear_velocity = direction * projectile_speed
+	get_parent().add_child(projectile)
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "attack":
+		attacking = false

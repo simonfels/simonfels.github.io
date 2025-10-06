@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://do1emodljcn6b"]
+[gd_scene load_steps=23 format=3 uid="uid://do1emodljcn6b"]
 
 [ext_resource type="Script" uid="uid://8cxpvndjkman" path="res://Scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://b6sjxsn2h45dx" path="res://Scenes/hitflash.gdshader" id="2_fkybt"]
 [ext_resource type="Texture2D" uid="uid://crx3d0x16p3yc" path="res://Sprites/player_idle.png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bkp6pa10jt2mq" path="res://Sprites/player_run.png" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://8fnd33e71dp7" path="res://Scripts/area_2d.gd" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://qh0yxvubiqfl" path="res://Sprites/weapon.png" id="6_x3wgy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bvp3"]
 radius = 6.0
@@ -87,7 +88,85 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
 size = Vector2(11, 14)
 
+[sub_resource type="Animation" id="Animation_3smsa"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x3wgy"]
+resource_name = "attack"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.5, -0.025000002, 0.05701409, 0, 0, 2.935644, -0.07, -0.54628813, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 0.46666667, 1)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_projectile"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8erm5"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8erm5"]
+_data = {
+&"RESET": SubResource("Animation_3smsa"),
+&"attack": SubResource("Animation_x3wgy"),
+&"idle": SubResource("Animation_8erm5")
+}
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 slide_on_ceiling = false
 script = ExtResource("1_4flbx")
 speed = 235
@@ -98,10 +177,12 @@ knockback_strength = 200.0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("CapsuleShape2D_1bvp3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 rect = Rect2(-7, -8, 13, 16)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -109,8 +190,10 @@ material = SubResource("ShaderMaterial_x3wgy")
 sprite_frames = SubResource("SpriteFrames_1jxqw")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.5307519
 
 [node name="Area2D" type="Area2D" parent="." groups=["player"]]
+visible = false
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("4_vgqql")
@@ -121,7 +204,28 @@ shape = SubResource("RectangleShape2D_6t5aa")
 
 [node name="IFrames" type="Timer" parent="."]
 wait_time = 0.2
+one_shot = true
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="WeaponAnimation" type="Node2D" parent="Weapon"]
+position = Vector2(0, 1)
+
+[node name="WeaponSprite" type="Sprite2D" parent="Weapon/WeaponAnimation"]
+z_index = -1
+position = Vector2(-3, -7)
+texture = ExtResource("6_x3wgy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/WeaponAnimation/WeaponSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_8erm5")
+}
+autoplay = "idle"
+
+[node name="Marker2D" type="Marker2D" parent="Weapon"]
+position = Vector2(16, 1)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
 [connection signal="timeout" from="IFrames" to="." method="_on_i_frames_timeout"]
+[connection signal="animation_finished" from="Weapon/WeaponAnimation/WeaponSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

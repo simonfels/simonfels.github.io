@@ -14,7 +14,7 @@ var target_location = Vector2.ZERO
 
 func _ready() -> void:
 	spawn_point = transform.get_origin()
-	movement_area = Vector2(spawn_point.x + movement_range, spawn_point.y)
+	movement_area = Vector2(spawn_point.x, spawn_point.y)
 	target_location = movement_area
 
 func _physics_process(delta):
@@ -42,7 +42,7 @@ func _physics_process(delta):
 	#	target_velocity.y = -sqrt(jump_height * 2.0 * fall_acceleration)
 
 	# Moving the Character
-	velocity = target_velocity
+	#velocity = target_velocity
 	move_and_slide()
 
 func switch_direction():
