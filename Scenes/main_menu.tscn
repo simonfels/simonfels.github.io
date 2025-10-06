@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bep1hm56p4wgd"]
+[gd_scene load_steps=18 format=3 uid="uid://bep1hm56p4wgd"]
 
 [ext_resource type="Script" uid="uid://fer60wmghqmr" path="res://Scripts/main_menu.gd" id="1_n45e2"]
 [ext_resource type="Texture2D" uid="uid://btmbyj4m56l86" path="res://Sprites/start_button.png" id="2_16hvj"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cq0k7b3fniir3" path="res://Sprites/2xdmg.png" id="13_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://sl6hpc278ms5" path="res://Sprites/youwin.png" id="14_wyh8j"]
 [ext_resource type="Texture2D" uid="uid://0vwlokwmske2" path="res://Sprites/projectile.png" id="15_ujyyl"]
+[ext_resource type="AudioStream" uid="uid://bimuusacfmb2i" path="res://Sound/menu_click.wav" id="16_m3bi6"]
 
 [sub_resource type="Theme" id="Theme_glbon"]
 
@@ -165,6 +166,9 @@ visible = false
 position = Vector2(-83, -35)
 scale = Vector2(2, 2)
 texture = ExtResource("15_ujyyl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_m3bi6")
 
 [connection signal="button_down" from="Buttons_Texts/StartButton2/Button" to="." method="_on_start_button"]
 [connection signal="button_down" from="Button5" to="." method="_on_buy_articact1"]
