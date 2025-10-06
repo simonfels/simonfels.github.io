@@ -29,7 +29,10 @@ var damage_multi = 1.0
 var attack_speed_multi = 1.0
 var double_jumped = false
 
+var currentLevel = 1
+
 func _ready():
+	currentLevel = SaveState.level
 	spawn_point = transform
 	# 2x Attackspeed (kelch)
 	projectile_unlocked = SaveState.artifact1
@@ -143,7 +146,7 @@ func apply_knockback(direction: Vector2) -> void:
 	if not $IFrames.is_stopped():
 		return
 
-	take_damage(10)
+	take_damage(20 * (currentLevel / 2 ))
 	is_knocked_back = true
 	knockback_timer = knockback_duration
 	knockback_velocity = direction * knockback_strength

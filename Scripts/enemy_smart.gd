@@ -9,8 +9,8 @@ var isAlive = true
 
 func _ready():
 	var currentLevel = SaveState.level
-	maxHealth = maxHealth * (currentLevel / 4)
-	health = health * (currentLevel / 4)
+	maxHealth = maxHealth * (1 + (currentLevel / 4))
+	health = health * (1 + (currentLevel / 4))
 	target = get_tree().current_scene.find_child("Player")
 	print_debug(target)
 
