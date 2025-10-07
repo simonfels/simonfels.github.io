@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://do1emodljcn6b"]
 
 [ext_resource type="Script" uid="uid://8cxpvndjkman" path="res://Scripts/player.gd" id="1_4flbx"]
-[ext_resource type="Shader" uid="uid://b6sjxsn2h45dx" path="res://Scenes/hitflash.gdshader" id="2_fkybt"]
+[ext_resource type="Shader" uid="uid://b6sjxsn2h45dx" path="res://Shader/hitflash.gdshader" id="2_fkybt"]
 [ext_resource type="Texture2D" uid="uid://crx3d0x16p3yc" path="res://Sprites/player_idle.png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bkp6pa10jt2mq" path="res://Sprites/player_run.png" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://8fnd33e71dp7" path="res://Scripts/area_2d.gd" id="4_vgqql"]

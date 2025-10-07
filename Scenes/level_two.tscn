@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bmc1xedmrbq0u"]
+[gd_scene load_steps=10 format=4 uid="uid://b25wt0f33xy0d"]
 
 [ext_resource type="Script" uid="uid://lmqc4efq7qgq" path="res://Scripts/level_two.gd" id="1_hwt33"]
 [ext_resource type="PackedScene" uid="uid://do1emodljcn6b" path="res://Scenes/player.tscn" id="2_8jpcs"]
@@ -281,7 +281,8 @@ SoulSpawnpoints = [NodePath("SeelenbeckenSpwanpunkte/SeelenBeckenSpawnpoint1"), 
 
 [node name="Player" parent="." instance=ExtResource("2_8jpcs")]
 position = Vector2(236, 111)
-speed = 120
+speed = 100
+fall_acceleration = 300
 acceleration = 15.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

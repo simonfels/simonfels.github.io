@@ -13,6 +13,9 @@ config_version=5
 config/name="collector-ldjam58"
 run/main_scene="uid://bep1hm56p4wgd"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0.92941177, 0.92941177, 0.92941177, 1)
+boot_splash/show_image=false
+boot_splash/image="uid://dmgihidoy1gx0"
 config/icon="res://icon.svg"
 
 [autoload]
