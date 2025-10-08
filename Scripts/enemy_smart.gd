@@ -9,13 +9,12 @@ var target: Node2D
 var isAlive = true
 
 func _ready():
-	var currentLevel = SaveState.level
-	maxHealth = maxHealth * (1 + (currentLevel / 4))
-	health = health * (1 + (currentLevel / 4))
+	var level_multi = SaveState.level - 1
+	maxHealth = maxHealth * (1.0 + (level_multi / 4.0))
+	health = health * (1.0 + (level_multi / 4.0))
 	HealthBar.max_value = maxHealth
 	HealthBar.value = health
 	target = get_tree().current_scene.find_child("Player")
-	print_debug(target)
 
 func _physics_process(delta: float) -> void:
 	if not isAlive:

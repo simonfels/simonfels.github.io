@@ -42,7 +42,7 @@ func _ready():
 		damage_multi = 2.0
 	
 	if SaveState.artifact2:
-		attack_speed_multi = 2.0
+		attack_speed_multi = 1.5
 	
 	HealthBar.max_value = health
 	HealthBar.value = health
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		velocity = target_velocity
 		
 		if not attacking:
-			$Weapon.rotation = lerp($Weapon.rotation, round($Weapon.rotation / (2*PI))*(2*PI), 0.2)
+			$Weapon.rotation = lerp($Weapon.rotation, round($Weapon.rotation / TAU) * TAU, 0.2)
 
 		move_and_slide()
 

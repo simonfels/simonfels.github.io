@@ -284,6 +284,7 @@ position = Vector2(236, 111)
 speed = 100
 fall_acceleration = 300
 acceleration = 15.0
+attack_speed = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -27)
