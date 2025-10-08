@@ -148,7 +148,7 @@ func apply_knockback(direction: Vector2) -> void:
 	if not $IFrames.is_stopped():
 		return
 
-	take_damage(20 * (1 + (currentLevel / 2 )))
+	take_damage(10 + (10 * currentLevel))
 	is_knocked_back = true
 	knockback_timer = knockback_duration
 	knockback_velocity = direction * knockback_strength

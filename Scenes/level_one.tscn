@@ -296,6 +296,16 @@ curve = SubResource("Curve2D_ys0qe")
 position = Vector2(185, 58)
 rotation = 0.009803607
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(521.00006, -1297)
+rotation = -3.1415925
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(5, -498.5)
+shape = SubResource("RectangleShape2D_3lrk7")
+
 [node name="StaticBody2D3" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(-199.99997, -1040)
 rotation = -3.1415925
@@ -313,16 +323,6 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(5, -498.5)
-shape = SubResource("RectangleShape2D_3lrk7")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="StaticBody2D2" groups=["walls"]]
-position = Vector2(-825, -721)
-rotation = 1.5707964
-collision_layer = 15
-collision_mask = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2/StaticBody2D2"]
 position = Vector2(5, -498.5)
 shape = SubResource("RectangleShape2D_3lrk7")
 
